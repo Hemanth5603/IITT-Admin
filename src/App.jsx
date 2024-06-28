@@ -7,10 +7,13 @@ const App = () => {
   return (
     <div>
       <Navbar/>
+      
       <Api/>
 
     </div>
   )
 }
+
+
 
 export default App
