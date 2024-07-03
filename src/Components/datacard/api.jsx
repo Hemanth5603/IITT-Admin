@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import Card from '../../Components/datacard/card';
 import './card.css'; 
@@ -21,6 +19,7 @@ const Api = () => {
             })
             .then(data => {
                 setData(data.data);
+                console.log(data.data);
                 setLoading(false);
             })
             .catch(error => {
@@ -29,18 +28,22 @@ const Api = () => {
             });
     }, []);
 
+    const handleRemove = (id) => {
+        setData((prevData) => prevData.filter(item => item.DataId !== id));
+    };
+
     if (loading) {
         return <p>Loading...</p>;
     } 
     if (error) {
-        return <p>Error: {error.message}</p>
+        return <p>Error: {error.message}</p>;
     }
 
     return (
         <div className="main-content">
             <div className="container">
-                {data.map((item, index) => (
-                    <Card key={index} item={item} />
+                {data.map((item) => (
+                    <Card key={item.DataId} item={item} onRemove={handleRemove} />
                 ))}
             </div>
         </div>

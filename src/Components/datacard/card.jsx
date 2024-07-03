@@ -1,20 +1,58 @@
-
-
 import React, { useState } from "react";
 import './card.css';
 
-const Card = ({ item }) => {
+const Card = ({ item, onRemove }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const imageUrl = `https://iittnif-bucket.s3.eu-north-1.amazonaws.com${item.Image}`;
-
+    
     const handleAccept = () => {
-        // Implement the logic for accepting
-       // console.log(Accepted ${item.Category});
+        fetch('http://13.60.93.136:8080/iitt-admin/approve-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                data_id: item.DataId,
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Something went wrong");
+            }
+            return response.json();
+        })
+        .then(() => {
+            console.log(`Accepted ${item.DataId}`);
+            onRemove(item.DataId);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
     };
 
     const handleReject = () => {
-        // Implement the logic for rejecting
-        //console.log(Rejected ${item.Category});
+        fetch('http://13.60.93.136:8080/iitt-admin/reject-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                data_id: item.DataId,
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Something went wrong");
+            }
+            return response.json();
+        })
+        .then(() => {
+            console.log(`Rejected ${item.DataId}`);
+            onRemove(item.DataId);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
     };
 
     const handleImageClick = () => {

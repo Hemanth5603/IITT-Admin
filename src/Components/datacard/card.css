@@ -1,3 +1,6 @@
+.main-content {
+    margin-top: 100px; /* Adjust this value based on the height of your navbar */
+}
 
 .container {
     display: flex;
@@ -37,10 +40,12 @@
     margin-top: 10px;
     justify-content: left;
 }
+
 .details p {
     margin: 5px 0;
-    text-align: left; 
+    text-align: left;
 }
+
 .button-container {
     display: flex;
     justify-content: space-between;
@@ -84,30 +89,33 @@
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     overflow: auto;
-    padding: 20px; 
+    padding: 20px;
 }
 
 .modal-content {
     position: relative;
     max-width: 90%;
     max-height: 90%;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .modal-image {
-    width: 100%;
+    width: 80%; 
     height: auto;
+    display: block;
+    position: relative;
 }
 
 .close-button {
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 150px;
     background: red;
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     font-size: 18px;
-    border-radius: 70%;
+    border-radius: 50%; 
+    z-index: 1001; 
 }
